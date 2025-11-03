@@ -52,17 +52,33 @@
 </head>
 <body class="antialiased">
 
-    <!-- JavaScript для плавного скролла -->
+    <!-- JavaScript для плавного скролла и управления мобильным меню -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Плавный скролл
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
+                    // Скрыть меню после клика на мобильном
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                         mobileMenu.classList.add('hidden');
+                    }
+                    
                     document.querySelector(this.getAttribute('href')).scrollIntoView({
                         behavior: 'smooth'
                     });
                 });
             });
+            
+            // Тоггл мобильного меню
+            const menuButton = document.getElementById('menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (menuButton && mobileMenu) {
+                menuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
         });
         
         // Функции для обработки ошибок загрузки изображений
@@ -82,10 +98,13 @@
     <nav class="sticky top-0 z-50 bg-white shadow-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
+                <!-- Логотип/Имя -->
                 <div class="flex items-center">
                     <span class="text-xl font-bold accent-color">Ярослав С.</span>
                 </div>
-                <div class="flex items-center space-x-4">
+                
+                <!-- Десктопное меню и переключатель языка -->
+                <div class="hidden lg:flex items-center space-x-4">
                     <a href="#about" class="text-gray-600 hover:text-gray-900 transition duration-150">Обо мне</a>
                     <a href="#portfolio" class="text-gray-600 hover:text-gray-900 transition duration-150">Портфолио</a>
                     <a href="#tech-stack" class="text-gray-600 hover:text-gray-900 transition duration-150">Инструменты</a>
@@ -95,6 +114,29 @@
                         English
                     </a>
                 </div>
+
+                <!-- Кнопка-гамбургер для мобильных -->
+                <div class="flex items-center lg:hidden">
+                    <a href="index_en.html" class="px-3 py-1 mr-2 text-sm font-semibold rounded-lg accent-bg text-white hover:opacity-90 transition duration-150">
+                        English
+                    </a>
+                    <button id="menu-button" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                        <!-- Иконка гамбургера -->
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Мобильное меню (скрыто по умолчанию) -->
+        <div id="mobile-menu" class="hidden lg:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-gray-200">
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">Обо мне</a>
+                <a href="#portfolio" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">Портфолио</a>
+                <a href="#tech-stack" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">Инструменты</a>
+                <a href="#experience" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">Опыт</a>
             </div>
         </div>
     </nav>
@@ -103,10 +145,10 @@
     <header id="hero" class="header-bg py-16 sm:py-24 text-white">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between">
             <div class="lg:w-3/5 space-y-4 text-center lg:text-left">
-                <h1 class="text-4xl sm:text-6xl font-extrabold leading-tight">
+                <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight">
                     Ярослав Сулейменов
                 </h1>
-                <p class="text-2xl sm:text-3xl font-light accent-color">
+                <p class="text-xl sm:text-3xl font-light accent-color">
                     Data Analyst | Business Consultant | B2B Sales Expert
                 </p>
                 <p class="text-gray-300 text-lg max-w-xl mx-auto lg:mx-0 pt-2">
