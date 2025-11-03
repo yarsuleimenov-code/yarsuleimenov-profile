@@ -43,7 +43,7 @@
             }
         }
 
-        /* Style for active certificate links */
+        /* Style for certification links */
         .cert-link:hover {
             text-decoration: underline;
             color: var(--accent-color);
@@ -52,24 +52,40 @@
 </head>
 <body class="antialiased">
 
-    <!-- JavaScript for smooth scrolling -->
+    <!-- JavaScript for smooth scrolling and mobile menu toggle -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Smooth Scroll
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
+                    // Hide menu after click on mobile
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                         mobileMenu.classList.add('hidden');
+                    }
+                    
                     document.querySelector(this.getAttribute('href')).scrollIntoView({
                         behavior: 'smooth'
                     });
                 });
             });
+            
+            // Mobile menu toggle
+            const menuButton = document.getElementById('menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (menuButton && mobileMenu) {
+                menuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
         });
-
+        
         // Functions to handle image loading errors
         function onImageError(element, fallbackText) {
             element.onerror = null; // Prevent infinite loop
-            element.style.display = 'none'; // Hide broken <img> tag
-
+            element.style.display = 'none'; // Hide the broken <img> tag
+            
             // Add text fallback
             const fallbackDiv = document.createElement('div');
             fallbackDiv.className = 'text-center text-gray-500 text-xs mt-2';
@@ -82,16 +98,45 @@
     <nav class="sticky top-0 z-50 bg-white shadow-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
-                <div class="flex items-center space-x-4">
+                <!-- Logo/Name -->
+                <div class="flex items-center">
+                    <span class="text-xl font-bold accent-color">Yaroslav S.</span>
+                </div>
+                
+                <!-- Desktop Menu and Language Switcher -->
+                <div class="hidden lg:flex items-center space-x-4">
                     <a href="#about" class="text-gray-600 hover:text-gray-900 transition duration-150">About Me</a>
                     <a href="#portfolio" class="text-gray-600 hover:text-gray-900 transition duration-150">Portfolio</a>
                     <a href="#tech-stack" class="text-gray-600 hover:text-gray-900 transition duration-150">Tools</a>
                     <a href="#experience" class="text-gray-600 hover:text-gray-900 transition duration-150">Experience</a>
-                    <!-- Language Switch Button -->
+                    <!-- Button to Russian version -->
                     <a href="index.html" class="px-3 py-1 text-sm font-semibold rounded-lg accent-bg text-white hover:opacity-90 transition duration-150">
                         Russian
                     </a>
                 </div>
+
+                <!-- Hamburger button for mobile -->
+                <div class="flex items-center lg:hidden">
+                    <a href="index.html" class="px-3 py-1 mr-2 text-sm font-semibold rounded-lg accent-bg text-white hover:opacity-90 transition duration-150">
+                        Russian
+                    </a>
+                    <button id="menu-button" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                        <!-- Hamburger icon -->
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (hidden by default) -->
+        <div id="mobile-menu" class="hidden lg:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-gray-200">
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">About Me</a>
+                <a href="#portfolio" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">Portfolio</a>
+                <a href="#tech-stack" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">Tools</a>
+                <a href="#experience" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">Experience</a>
             </div>
         </div>
     </nav>
@@ -100,14 +145,14 @@
     <header id="hero" class="header-bg py-16 sm:py-24 text-white">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between">
             <div class="lg:w-3/5 space-y-4 text-center lg:text-left">
-                <h1 class="text-4xl sm:text-6xl font-extrabold leading-tight">
+                <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight">
                     Yaroslav Suleimenov
                 </h1>
-                <p class="text-2xl sm:text-3xl font-light accent-color">
+                <p class="text-xl sm:text-3xl font-light accent-color">
                     Data Analyst | Business Consultant | B2B Sales Expert
                 </p>
                 <p class="text-gray-300 text-lg max-w-xl mx-auto lg:mx-0 pt-2">
-                    10+ years of experience in the B2B segment, focusing on the <strong>IBP concept, end-to-end planning</strong>, business process analysis, and management reporting.
+                    Over 10 years of experience in the B2B segment, focusing on <strong>IBP concepts, end-to-end planning</strong>, business process analysis, and management reporting preparation.
                 </p>
                 <a href="#about" class="inline-block mt-6 px-8 py-3 bg-white accent-color font-semibold rounded-lg shadow-xl hover:bg-gray-100 transition duration-300">
                     Learn More
@@ -121,7 +166,7 @@
         </div>
     </header>
 
-    <!-- Key Qualifications Section -->
+    <!-- Key Qualifications -->
     <section id="about" class="py-12 sm:py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="section-title text-center mb-12">Key Qualifications</h2>
@@ -132,7 +177,7 @@
                     <div class="text-3xl accent-color mb-3">📊</div>
                     <h3 class="text-xl font-bold mb-3">IBP and End-to-End Planning</h3>
                     <p class="text-gray-600">
-                        In-depth knowledge of model architecture, financial modeling, and data preparation. Proficient in <strong>SQL, Python</strong>, and <strong>Power BI</strong> for analysis and visualization.
+                        Deep knowledge of model architecture, financial modeling, and data preparation. Proficient in <strong>SQL, Python</strong>, and <strong>Power BI</strong> for analysis and visualization.
                     </p>
                 </div>
 
@@ -141,7 +186,7 @@
                     <div class="text-3xl accent-color mb-3">📈</div>
                     <h3 class="text-xl font-bold mb-3">Business Analytics & B2B</h3>
                     <p class="text-gray-600">
-                        10+ years experience in B2B sales and client management. Focus on <strong>ABC/XYZ analysis</strong>, KPI control (OSA, Shelf Share), and increasing contract profitability.
+                        10+ years of experience in B2B sales and client management. Focus on <strong>ABC/XYZ analysis</strong>, KPI monitoring (OSA, Shelf Share), and increasing contract profitability.
                     </p>
                 </div>
 
@@ -150,7 +195,7 @@
                     <div class="text-3xl accent-color mb-3">🧑‍🏫</div>
                     <h3 class="text-xl font-bold mb-3">PM Skills and Training</h3>
                     <p class="text-gray-600">
-                        Experience managing tasks via <strong>YouTrack</strong>, coordinating presale teams, and conducting training webinars/courses for junior specialists and university students.
+                        Experience managing tasks via <strong>YouTrack</strong>, coordinating presale teams, and conducting training webinars/courses for junior specialists and students.
                     </p>
                 </div>
 
@@ -163,7 +208,7 @@
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="section-title mb-6">Portfolio | Project Experience</h2>
             <p class="text-lg text-gray-600 mb-8">
-                Real demonstrations of skills in OLAP modeling, analytics, and content creation.
+                Real-world demonstrations of skills in OLAP modeling, analytics, and educational content creation.
             </p>
 
             <div class="card p-6 sm:p-8 md:p-10 shadow-xl bg-gray-50 border border-gray-200">
@@ -171,19 +216,19 @@
                     Elective Course "Introduction to IBP and OLAP"
                 </h3>
                 <p class="text-gray-700 mb-6">
-                    Self-developed and delivered course for students at MIIT university. Includes materials on architecture, modeling, and financial analysis.
+                    Independently developed and taught course for MUIT university students. Covers architecture, modeling, and financial analysis.
                 </p>
-                <a href="https://yarsuleimenov-code.github.io/IITU_OLAP_Course/en/index.html" target="_blank" class="inline-block px-8 py-3 text-lg font-semibold text-white accent-bg rounded-lg shadow-lg hover:opacity-90 transition duration-300">
+                <a href="https://yarsuleimenov-code.github.io/IITU_OLAP_Course/" target="_blank" class="inline-block px-8 py-3 text-lg font-semibold text-white accent-bg rounded-lg shadow-lg hover:opacity-90 transition duration-300">
                     View Course on GitHub Pages ↗
                 </a>
             </div>
         </div>
     </section>
-
+    
     <!-- Technology Stack -->
     <section id="tech-stack" class="py-12 sm:py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="section-title text-center mb-12">My Toolset</h2>
+            <h2 class="section-title text-center mb-12">My Tools</h2>
             <div class="flex flex-wrap justify-center gap-6 sm:gap-8">
 
                 <!-- Tool: SQL -->
@@ -225,22 +270,22 @@
             </div>
         </div>
     </section>
-
+    
     <!-- Education and Certification -->
     <section id="education" class="py-12 sm:py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="section-title text-center mb-12">Recent Qualification</h2>
+            <h2 class="section-title text-center mb-12">Relevant Qualifications</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
+                
                 <!-- Certificate 1: Data Analyst -->
                 <div class="card p-6 shadow-md border-t-4 border-t-blue-500">
                     <h3 class="text-lg font-bold mb-2 text-gray-700">Data Analyst (2026)</h3>
-                    <p class="text-sm text-gray-500 mb-4">AANO DPO "SKAYENG"</p>
+                    <p class="text-sm text-gray-500 mb-4">OANO DPO "SKAENG"</p>
                     <a href="#" class="text-sm font-semibold accent-color opacity-50 cursor-default" onclick="return false;">
                         In progress...
                     </a>
                 </div>
-
+                
                 <!-- Certificate 2: BI Analyst -->
                 <div class="card p-6 shadow-md border-t-4 border-t-yellow-600">
                     <h3 class="text-lg font-bold mb-2 text-gray-700">BI Analyst (2025)</h3>
@@ -258,19 +303,19 @@
                         View Certificate (PDF) ↗
                     </a>
                 </div>
-
-                <!-- Certificate 4: Customer Experience Management Technologies -->
+                
+                <!-- Certificate 4: Customer Experience Management Tech -->
                 <div class="card p-6 shadow-md border-t-4 border-t-red-500">
-                    <h3 class="text-lg font-bold mb-2 text-gray-700">Customer Experience Mngmt Technologies</h3>
+                    <h3 class="text-lg font-bold mb-2 text-gray-700">Customer Experience Management Technologies</h3>
                     <p class="text-sm text-gray-500 mb-4">Electronic Certificate</p>
                     <a href="assets/client_exp.pdf" target="_blank" class="text-sm font-semibold text-blue-600 cert-link">
                         View Certificate (PDF) ↗
                     </a>
                 </div>
-
-                <!-- Certificate 5: SQL Interactive Trainer -->
+                
+                <!-- Certificate 5: Interactive SQL Simulator -->
                 <div class="card p-6 shadow-md border-t-4 border-t-green-500">
-                    <h3 class="text-lg font-bold mb-2 text-gray-700">SQL Interactive Trainer</h3>
+                    <h3 class="text-lg font-bold mb-2 text-gray-700">Interactive SQL Simulator</h3>
                     <p class="text-sm text-gray-500 mb-4">Online Platform (2024)</p>
                     <a href="assets/SQL_sert.pdf" target="_blank" class="text-sm font-semibold text-blue-600 cert-link">
                         View Certificate (PDF) ↗
@@ -278,7 +323,7 @@
                 </div>
 
             </div>
-
+            
             <div class="mt-10 pt-6 border-t border-gray-200">
                 <h3 class="text-xl font-bold mb-2">Primary Higher Education</h3>
                 <p class="text-gray-700">
@@ -290,7 +335,7 @@
     </section>
 
 
-    <!-- Work Experience Section -->
+    <!-- Work Experience -->
     <section id="experience" class="py-12 sm:py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="section-title text-center mb-12">Work Experience</h2>
@@ -300,10 +345,10 @@
                 <h3 class="text-xl sm:text-2xl font-bold accent-color mb-1">Business Consultant & Modeler</h3>
                 <p class="text-lg font-semibold text-gray-700 mb-2">TOO «Caspian Planning Technologies» | May 2025 – Present</p>
                 <ul class="list-disc list-inside space-y-2 text-gray-600">
-                    <li>Mastered and applied <strong>financial modeling skills</strong> in the CasPlan OLAP system: model architecture, formula logic, and dimension management.</li>
-                    <li>Participated in presale activities: managed client meetings, coordinated demo preparation, and maintained documentation.</li>
-                    <li>Organized and conducted a series of training webinars for employees and an elective course <strong>"Introduction to IBP and OLAP"</strong> for MIIT University.</li>
-                    <li>Utilized <strong>YouTrack</strong> for planning, monitoring task execution, and managing the project flow.</li>
+                    <li>Mastered and applied <strong>financial modeling skills</strong> in the CasPlan OLAP system: model architecture, formula syntax, dimension manipulation.</li>
+                    <li>Participated in presale activities: administered client meetings, coordinated demo preparation, managed documentation.</li>
+                    <li>Organized and conducted a series of training webinars for employees and an elective course <strong>"Introduction to IBP and OLAP"</strong> for MUIT university.</li>
+                    <li>Utilized <strong>YouTrack</strong> for planning, task control, and project flow management.</li>
                 </ul>
             </div>
 
@@ -312,32 +357,32 @@
                 <h3 class="text-xl sm:text-2xl font-bold accent-color mb-1">Regional Brand Representative</h3>
                 <p class="text-lg font-semibold text-gray-700 mb-2">Forte Holding GmbH | June 2023 – May 2025</p>
                 <ul class="list-disc list-inside space-y-2 text-gray-600">
-                    <li>Built a client base in 4 cities in Kazakhstan, ensuring the brand's stable presence in a new territory.</li>
-                    <li>Conducted <strong>ABC/XYZ analysis</strong> of the client base, identifying the priority <strong>20% of clients</strong> generating <strong>75% of revenue</strong>, allowing for focused effort.</li>
-                    <li>Managed regular sales analytics: identified reasons for deviations from plans, analyzed marketing campaign effectiveness via <strong>KPIs</strong> (sales growth, promo ROI).</li>
-                    <li>Optimized the service request process, which <strong>reduced response time</strong> and increased customer satisfaction.</li>
+                    <li>Built a client base in 4 cities in Kazakhstan, ensuring a stable brand presence in a new territory.</li>
+                    <li>Conducted <strong>ABC/XYZ analysis</strong> of the client base, identifying the priority <strong>20% of clients</strong> generating <strong>75% of revenue</strong>.</li>
+                    <li>Performed regular sales analytics: identified reasons for deviations from plans, analyzed marketing event effectiveness based on <strong>KPIs</strong> (sales growth, promo ROI).</li>
+                    <li>Optimized the process for handling service requests, which <strong>reduced response time</strong> and increased client satisfaction.</li>
                 </ul>
             </div>
 
-            <!-- Experience 3: Russian Light LLC (Русский свет ООО) -->
+            <!-- Experience 3: Russkiy Svet LLC -->
             <div class="mb-10 p-6 card">
                 <h3 class="text-xl sm:text-2xl font-bold accent-color mb-1">Lead Key Account Manager</h3>
-                <p class="text-lg font-semibold text-gray-700 mb-2">Russian Light LLC | September 2016 – May 2023</p>
+                <p class="text-lg font-semibold text-gray-700 mb-2">Russkiy Svet LLC | September 2016 – May 2023</p>
                 <ul class="list-disc list-inside space-y-2 text-gray-600">
                     <li>Ensured B2B segment turnover growth of <strong>20% annually</strong>.</li>
                     <li>Conducted regular sales and gross profit analysis, increasing the profitability of key contracts by <strong>12%</strong>.</li>
-                    <li>Automated client interaction, ensuring <strong>87%</strong> of orders were placed through the online store.</li>
-                    <li>Managed a portfolio of B2B clients (metallurgy, machine building), controlling supply volumes (Sell-In) and margin levels.</li>
+                    <li>Automated client interaction, achieving a customer order rate through the online store of <strong>87%</strong>.</li>
+                    <li>Managed a portfolio of B2B clients (metallurgy, engineering), controlled supply volumes (Sell-In), and margin levels.</li>
                 </ul>
             </div>
 
-            <!-- Experience 4: 220 VOLT LLC (ТОО «220 VOLT) -->
+            <!-- Experience 4: TOO «220 VOLT (IE Ashimova M.M.) -->
             <div class="mb-10 p-6 card">
                 <h3 class="text-xl sm:text-2xl font-bold accent-color mb-1">Supply Department Analyst</h3>
-                <p class="text-lg font-semibold text-gray-700 mb-2">220 VOLT LLC | February 2014 – September 2016</p>
+                <p class="text-lg font-semibold text-gray-700 mb-2">TOO «220 VOLT (IE Ashimova M.M.) | February 2014 – September 2016</p>
                 <ul class="list-disc list-inside space-y-2 text-gray-600">
-                    <li>Developed an <strong>automated Excel system</strong> (formulas, pivot tables, macros), reducing price list updates and cleaning from <strong>2-3 hours to 30 minutes</strong>.</li>
-                    <li>Conducted assortment segmentation (<strong>ABC/XYZ analysis</strong>), initiated seasonal rotation and the exclusion of 50+ low-margin SKUs.</li>
+                    <li>Developed an <strong>automated Excel system</strong> (formulas, pivot tables, macros), reducing price list updating and cleaning from <strong>2-3 hours to 30 minutes</strong>.</li>
+                    <li>Conducted assortment segmentation (<strong>ABC/XYZ analysis</strong>), initiating seasonal rotation and the exclusion of 50+ low-margin SKUs.</li>
                     <li>Monitored stock levels for 15+ brands and ensured a monthly reduction of excess inventory by <strong>8-12%</strong>.</li>
                     <li>Automated calculation of commercial offers, reducing quote preparation time from 1-2 days to <strong>2-3 hours</strong>.</li>
                 </ul>
@@ -362,7 +407,7 @@
                 </p>
             </div>
             <p class="mt-8 text-sm text-gray-400">
-                &copy; 2025 Yaroslav Suleimenov.
+                &copy; 2025 Yaroslav Suleimenov. 
             </p>
         </div>
     </footer>
