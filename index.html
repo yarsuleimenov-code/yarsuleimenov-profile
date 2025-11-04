@@ -194,10 +194,11 @@
                 </a>
             </div>
             
-            <!-- Круглое изображение с акцентной рамкой и инициалами -->
+            <!-- Возврат к оригинальной фотографии assets/main_foto.jpg -->
             <div class="lg:w-2/5 mt-10 lg:mt-0 flex justify-center">
-                <div class="w-32 h-32 rounded-full overflow-hidden profile-ring flex items-center justify-center">
-                    <span class="text-white text-4xl font-extrabold">ЯС</span>
+                <!-- Удаляем класс profile-ring, чтобы избежать конфликта стилей с фото -->
+                <div class="w-64 h-64 sm:w-80 sm:h-80 rounded-full overflow-hidden ring-4 ring-white ring-offset-4 ring-offset-gray-700 shadow-2xl">
+                    <img src="assets/main_foto.jpg" alt="Фото профиля Ярослава Сулейменова" class="w-full h-full object-cover" onerror="onImageError(this, 'Фото профиля')">
                 </div>
             </div>
             
@@ -282,7 +283,8 @@
                         <a href="ab_report/index.html" class="inline-block px-4 py-2 text-sm font-semibold text-white accent-bg rounded-lg shadow-md hover:opacity-90 transition duration-300">
                             Посмотреть инфографику
                         </a>
-                        <a href="ab_report/ab_report.ipynb" target="_blank" class="inline-block px-4 py-2 text-sm font-semibold bg-gray-700 text-white rounded-lg shadow-md hover:bg-gray-600 transition duration-300">
+                        <!-- ИЗМЕНЕНИЕ: Ссылка на Jupyter Notebook теперь ведет через nbviewer для форматированного просмотра -->
+                        <a href="https://nbviewer.jupyter.org/github/yarsuleimenov-code/yarsuleimenov-code.github.io/blob/main/ab_report/ab_report.ipynb" target="_blank" class="inline-block px-4 py-2 text-sm font-semibold bg-gray-700 text-white rounded-lg shadow-md hover:bg-gray-600 transition duration-300">
                             Исходный код (Jupyter) ↗
                         </a>
                     </div>
@@ -363,7 +365,7 @@
 
                 <!-- Сертификат 3: Анализ фин. отчетности -->
                 <div class="card p-6 shadow-md border-t-4 border-t-orange-500">
-                    <h3 class="text-lg font-bold mb-2 text-gray-700">Анализ финансовой отчетности</h3>
+                    <h3 class="text-lg font-bold mb-2 на text-gray-700">Анализ финансовой отчетности</h3>
                     <p class="text-sm text-gray-500 mb-4">Электронный сертификат (2025)</p>
                     <a href="assets/fin_analysis.pdf" target="_blank" class="text-sm font-semibold text-blue-600 cert-link">
                         Посмотреть сертификат (PDF) ↗
