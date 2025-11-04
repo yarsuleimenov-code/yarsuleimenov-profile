@@ -52,7 +52,7 @@
 </head>
 <body class="antialiased">
 
-    <!-- JavaScript для плавного скролла и управления мобильным меню -->
+    <!-- JavaScript для плавного скролла и переключения мобильного меню -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Плавный скролл
@@ -71,7 +71,7 @@
                 });
             });
             
-            // Тоггл мобильного меню
+            // Переключение мобильного меню
             const menuButton = document.getElementById('menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
             if (menuButton && mobileMenu) {
@@ -98,12 +98,12 @@
     <nav class="sticky top-0 z-50 bg-white shadow-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
-                <!-- Logo/Name -->
+                <!-- Логотип/Имя -->
                 <div class="flex items-center">
-                    <span class="text-xl font-bold accent-color">Ярослав С.</span>
+                    <span class="text-xl font-bold accent-color">Ярослав Сулейменов</span>
                 </div>
                 
-                <!-- Десктопное меню и переключатель языка -->
+                <!-- Десктопное Меню и Переключатель Языка -->
                 <div class="hidden lg:flex items-center space-x-4">
                     <a href="#about" class="text-gray-600 hover:text-gray-900 transition duration-150">Обо мне</a>
                     <a href="#portfolio" class="text-gray-600 hover:text-gray-900 transition duration-150">Портфолио</a>
@@ -130,7 +130,7 @@
             </div>
         </div>
 
-        <!-- Мобильное меню (скрыто по умолчанию) -->
+        <!-- Мобильное Меню (скрыто по умолчанию) -->
         <div id="mobile-menu" class="hidden lg:hidden">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-gray-200">
                 <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">Обо мне</a>
@@ -205,22 +205,50 @@
 
     <!-- Портфолио проектов -->
     <section id="portfolio" class="py-12 sm:py-16 bg-white">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="section-title mb-6">Портфолио | Проектный опыт</h2>
             <p class="text-lg text-gray-600 mb-8">
                 Реальные демонстрации навыков в OLAP-моделировании, аналитике и создании обучающего контента.
             </p>
 
-            <div class="card p-6 sm:p-8 md:p-10 shadow-xl bg-gray-50 border border-gray-200">
-                <h3 class="text-2xl sm:text-3xl font-bold mb-4 accent-color">
-                    Факультативный курс "Введение в IBP и OLAP"
-                </h3>
-                <p class="text-gray-700 mb-6">
-                    Самостоятельно разработанный и прочитанный курс для студентов университета МУИТ. Содержит материалы по архитектуре, моделированию и финансовому анализу.
-                </p>
-                <a href="https://yarsuleimenov-code.github.io/IITU_OLAP_Course/" target="_blank" class="inline-block px-8 py-3 text-lg font-semibold text-white accent-bg rounded-lg shadow-lg hover:opacity-90 transition duration-300">
-                    Перейти к курсу на GitHub Pages ↗
-                </a>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Проект 1: OLAP Course -->
+                <div class="card p-6 shadow-xl bg-gray-50 border border-gray-200 text-left flex flex-col">
+                    <h3 class="text-2xl font-bold mb-3 accent-color">
+                        Факультативный курс "Введение в IBP и OLAP"
+                    </h3>
+                    <p class="text-gray-700 mb-4 flex-grow">
+                        Самостоятельно разработанный и прочитанный курс для студентов университета МУИТ. Содержит материалы по архитектуре, моделированию и финансовому анализу.
+                    </p>
+                    <div class="flex flex-wrap gap-3 mt-auto">
+                        <a href="https://yarsuleimenov-code.github.io/IITU_OLAP_Course/" target="_blank" class="inline-block px-4 py-2 text-sm font-semibold text-white accent-bg rounded-lg shadow-md hover:opacity-90 transition duration-300">
+                            Посмотреть курс ↗
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Проект 2: A/B Test Dashboard -->
+                <div class="card p-6 shadow-xl bg-gray-50 border border-gray-200 text-left flex flex-col">
+                    <h3 class="text-2xl font-bold mb-3 accent-color">
+                        A/B-тест: Эффективность пуш-уведомлений
+                    </h3>
+                    <p class="text-gray-700 mb-2">
+                        Анализ на Python (Pandas, SciPy, Matplotlib) влияния пуш-уведомлений на ключевые метрики.
+                    </p>
+                    <ul class="text-gray-700 text-sm mb-4 list-disc list-inside ml-4">
+                        <li>Рост среднего чека: <strong>+11.9%</strong></li>
+                        <li>Рост конверсии: <strong>+4.3 п.п.</strong></li>
+                        <li>Включает детальный региональный анализ.</li>
+                    </ul>
+                    <div class="flex flex-wrap gap-3 mt-auto">
+                        <a href="ab_report/index.html" class="inline-block px-4 py-2 text-sm font-semibold text-white accent-bg rounded-lg shadow-md hover:opacity-90 transition duration-300">
+                            Посмотреть инфографику
+                        </a>
+                        <a href="ab_report/ab_report.ipynb" target="_blank" class="inline-block px-4 py-2 text-sm font-semibold bg-gray-700 text-white rounded-lg shadow-md hover:bg-gray-600 transition duration-300">
+                            Исходный код (Jupyter) ↗
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
