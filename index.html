@@ -19,7 +19,8 @@
             color: var(--dark-color);
         }
         .header-bg {
-            background: linear-gradient(135deg, var(--dark-color) 0%, #374151 100%);
+            /* Градиент, максимально похожий на темный фон из примера */
+            background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
         }
         .accent-color {
             color: var(--accent-color);
@@ -48,6 +49,21 @@
             text-decoration: underline;
             color: var(--accent-color);
         }
+        
+        /* Стиль для иконок контактов в шапке */
+        .icon-link {
+            transition: color 0.3s;
+        }
+        .icon-link:hover {
+            color: #fcd34d; /* Желтый hover для контраста */
+        }
+        
+        /* Стиль для оформления изображения в стиле примера */
+        .profile-ring {
+            border: 4px solid #fcd34d; /* Желтое кольцо */
+            background-color: var(--accent-color); /* Зеленый фон для инициалов */
+        }
+        
     </style>
 </head>
 <body class="antialiased">
@@ -141,16 +157,35 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero Section (Обновлено в соответствии с запросом) -->
     <header id="hero" class="header-bg py-16 sm:py-24 text-white">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between">
+            
             <div class="lg:w-3/5 space-y-4 text-center lg:text-left">
                 <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight">
                     Ярослав Сулейменов
                 </h1>
-                <p class="text-xl sm:text-3xl font-light accent-color">
-                    Data Analyst | Business Consultant | B2B Sales Expert
+                <!-- Должность, оставлена по запросу -->
+                <p class="text-xl sm:text-3xl font-light text-yellow-300">
+                    Project Manager / Business Analyst
                 </p>
+                
+                <!-- Добавлены кнопки контактов: Email, Telegram, Резюме -->
+                <div class="mt-4 flex justify-center lg:justify-start space-x-6 text-2xl">
+                    <!-- Email -->
+                    <a href="mailto:yarsuleimenov@gmail.com" class="icon-link text-white" title="Email">
+                        <svg class="w-6 h-6 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26c.45.3.99.44 1.5.44s1.05-.14 1.5-.44L21 8M3 8V6a2 2 0 012-2h14a2 2 0 012 2v2M3 8l5.89 3.93c.45.3.99.44 1.5.44s1.05-.14 1.5-.44L21 8"></path></svg>
+                    </a>
+                    <!-- Telegram -->
+                    <a href="https://t.me/Yar_Suleimenov" target="_blank" class="icon-link text-white" title="Telegram">
+                        <svg class="w-6 h-6 inline" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.84 8.76l-8.5 3.32c-.74.28-.73.7-.12.9l2.06.63 4.88-3.04c.23-.15.44-.09.2.06l-4.04 3.65-.13.06-.54 1.76c.2.08.38.1.58.1.33 0 .6-.13.75-.4l1.16-1.12 3.6 2.65c.67.4 1.15.2 1.34-.63l.97-4.57c.18-.76-.32-1.12-1.02-.85z"></path></svg>
+                    </a>
+                    <!-- Резюме HH.KZ -->
+                    <a href="https://karaganda.hh.kz/resume/7cb80dacff0ebc71240039ed1f317635616543" target="_blank" class="icon-link text-white" title="Резюме (hh.kz)">
+                        <svg class="w-6 h-6 inline" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"></path></svg>
+                    </a>
+                </div>
+                
                 <p class="text-gray-300 text-lg max-w-xl mx-auto lg:mx-0 pt-2">
                     Более 10 лет опыта в B2B-сегменте, с фокусом на <strong>концепции IBP, сквозном планировании</strong>, анализе бизнес-процессов и подготовке управленческой отчётности.
                 </p>
@@ -158,11 +193,14 @@
                     Узнать больше
                 </a>
             </div>
+            
+            <!-- Круглое изображение с акцентной рамкой и инициалами -->
             <div class="lg:w-2/5 mt-10 lg:mt-0 flex justify-center">
-                <div class="w-64 h-64 sm:w-80 sm:h-80 rounded-full overflow-hidden ring-4 ring-white ring-offset-4 ring-offset-gray-700 shadow-2xl">
-                    <img src="assets/main_foto.jpg" alt="Фото профиля Ярослава Сулейменова" class="w-full h-full object-cover" onerror="onImageError(this, 'Фото профиля')">
+                <div class="w-32 h-32 rounded-full overflow-hidden profile-ring flex items-center justify-center">
+                    <span class="text-white text-4xl font-extrabold">ЯС</span>
                 </div>
             </div>
+            
         </div>
     </header>
 
