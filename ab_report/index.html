@@ -1,7 +1,3 @@
-<!-- Chosen Palette: Minimalistic Tech (Dark Blue/Gray with Emerald Green accent) -->
-<!-- Application Structure Plan: Dashboard & Thematic Drill-Down. Structure starts with an Executive Summary (KPI cards + Financial Impact) to establish the core finding immediately. This is followed by Overall Statistical Results (dynamic bar chart) providing visual proof. The final section, Segmentation Explorer, uses interactive tabs to allow drill-down into Positive, Neutral, and Negative segments. This flow (Summary -> Proof -> Detail) prioritizes business understanding and is chosen over mirroring the Jupyter Notebook structure to maximize usability for managers/PMs. -->
-<!-- Visualization & Content Choices: Summary: Overall Metrics -> Goal: Inform/Compare -> Viz: Dynamic Bar Charts -> Interaction: Toggle switch between Avg Pay and Conversion, Tab selection for segmentation. Justification: Bar charts clearly compare Test vs Control. The interactive segmentation allows focused exploration of the report's key nuance (non-uniform regional effect). Library/Method: Chart.js for all visualizations; JS for state management and dynamic UI updates. -->
-<!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -16,35 +12,61 @@
             --accent: #10b981;
             --dark-gray: #1f2937;
             --light-bg: #f9fafb;
-            --positive: #10b981;
-            --negative: #ef4444;
-            --neutral: #9ca3af;
+            --positive: #10b981; /* Green */
+            --negative: #ef4444; /* Red */
+            --neutral: #9ca3af; /* Gray */
         }
-        body { font-family: 'Inter', sans-serif; background-color: var(--light-bg); color: var(--dark-gray); }
-        .accent-color { color: var(--accent); }
-        .accent-bg { background-color: var(--accent); }
-        .kpi-card { border-left: 6px solid var(--accent); }
-        .chart-container { position: relative; width: 100%; max-width: 800px; height: 350px; margin-left: auto; margin-right: auto; }
-        @media (min-width: 640px) { .chart-container { height: 400px; } }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--light-bg); 
+            color: var(--dark-gray); 
+        }
+        .accent-color { 
+            color: var(--accent); 
+        }
+        .accent-bg { 
+            background-color: var(--accent); 
+        }
+        .chart-container { 
+            position: relative; 
+            width: 100%; 
+            max-width: 800px; 
+            height: 350px; 
+            margin-left: auto; 
+            margin-right: auto; 
+        }
+        @media (min-width: 640px) { 
+            .chart-container { 
+                height: 400px; 
+            } 
+        }
     </style>
 </head>
 <body class="antialiased">
 
     <div id="app" class="min-h-screen">
-        <!-- Навигация (Заголовок) -->
-        <header class="bg-white shadow-md">
-            <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
-                <div class="flex items-center space-x-4">
-                    <!-- Кнопка "Назад" -->
-                    <a href="../index.html" class="inline-flex items-center px-4 py-2 text-sm font-semibold text-white accent-bg rounded-lg shadow-md hover:opacity-90 transition duration-150">
-                        &#x2190; Назад
-                    </a>
+        <!-- Навигация (Заголовок) - Стилизовано по запросу -->
+        <header class="bg-white shadow-md py-6">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <!-- Контейнер для центрирования содержимого -->
+                <div class="flex flex-col items-center justify-center text-center">
                     
-                    <h1 class="text-2xl sm:text-3xl font-extrabold text-gray-800">
+                    <div class="mb-4">
+                        <!-- Кнопка "Назад" выделенная (увеличенный размер, тень) -->
+                        <a href="../index.html" class="inline-flex items-center px-6 py-3 text-lg font-bold text-white accent-bg rounded-xl shadow-xl hover:opacity-90 transition duration-150 transform hover:scale-105">
+                            &#x2190; Назад
+                        </a>
+                    </div>
+                    
+                    <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-800">
                         📊 A/B-тест: Эффективность Пуш-уведомлений (B2B)
                     </h1>
+                
+                    <p class="text-base text-gray-500 mt-2 max-w-2xl">
+                        Интерактивный отчет по анализу влияния нового инструмента маркетинга на средний чек и конверсию.
+                    </p>
                 </div>
-                <p class="text-sm text-gray-500 mt-1 pl-16">Интерактивный отчет по анализу влияния нового инструмента маркетинга на средний чек и конверсию.</p>
             </div>
         </header>
 
@@ -57,28 +79,28 @@
                 
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
                     <!-- Карточка 1: Средний чек -->
-                    <div class="bg-white p-6 rounded-xl shadow-lg kpi-card border-l-4" style="border-left-color: var(--positive);">
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-l-4" style="border-left-color: var(--positive);">
                         <p class="text-sm font-medium text-gray-500">Средний чек (Прирост)</p>
                         <p class="text-3xl font-extrabold mt-1 text-green-600">+11.9%</p>
                         <p class="text-xs text-gray-500 mt-2">P-value: 4.41e-21 (Значимо)</p>
                     </div>
 
                     <!-- Карточка 2: Конверсия -->
-                    <div class="bg-white p-6 rounded-xl shadow-lg kpi-card border-l-4" style="border-left-color: var(--positive);">
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-l-4" style="border-left-color: var(--positive);">
                         <p class="text-sm font-medium text-gray-500">Конверсия (Прирост)</p>
                         <p class="text-3xl font-extrabold mt-1 text-green-600">+4.3 п.п.</p>
                         <p class="text-xs text-gray-500 mt-2">P-value: 5.30e-20 (Значимо)</p>
                     </div>
 
                     <!-- Карточка 3: Финансовый баланс -->
-                    <div class="bg-white p-6 rounded-xl shadow-lg kpi-card border-l-4" style="border-left-color: var(--accent);">
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-l-4" style="border-left-color: var(--accent);">
                         <p class="text-sm font-medium text-gray-500">Общий финансовый баланс</p>
                         <p class="text-3xl font-extrabold mt-1 text-gray-800">237,337.93 ₽</p>
                         <p class="text-xs text-gray-500 mt-2">Чистый прирост выручки от ТТ с положительным эффектом.</p>
                     </div>
 
                     <!-- Карточка 4: Охваченные клиенты -->
-                    <div class="bg-white p-6 rounded-xl shadow-lg kpi-card border-l-4" style="border-left-color: var(--neutral);">
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-l-4" style="border-left-color: var(--neutral);">
                         <p class="text-sm font-medium text-gray-500">Количество клиентов в выборке</p>
                         <p class="text-3xl font-extrabold mt-1 text-gray-800">45,841</p>
                         <p class="text-xs text-gray-500 mt-2">После очистки данных и валидации ТТ.</p>
@@ -172,9 +194,9 @@
                         </ul>
                     </div>
                 </div>
-                <!-- Новая кнопка -->
+                <!-- Обновленная кнопка с корректной ссылкой на nbviewer -->
                 <div class="mt-8 text-center">
-                    <a href="ab_report.ipynb" target="_blank" class="inline-block px-8 py-3 text-lg font-semibold text-white accent-bg rounded-lg shadow-lg hover:opacity-90 transition duration-300">
+                    <a href="https://nbviewer.jupyter.org/github/yarsuleimenov-code/yarsuleimenov-profile/blob/main/ab_report/ab_report.ipynb" target="_blank" class="inline-block px-8 py-3 text-lg font-semibold text-white accent-bg rounded-lg shadow-lg hover:opacity-90 transition duration-300">
                         Исходный код (Python/Jupyter) ↗
                     </a>
                 </div>
@@ -229,6 +251,10 @@
                 }
                 return acc;
             }, []);
+        };
+
+        const globalGetStyle = (varName) => {
+            return getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
         };
 
         const renderMainChart = () => {
@@ -405,10 +431,6 @@
                 });
             });
         });
-
-        const globalGetStyle = (varName) => {
-            return getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
-        };
 
         Chart.defaults.color = globalGetStyle('--dark-gray');
         Chart.defaults.borderColor = globalGetStyle('--neutral');
