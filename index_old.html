@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ярослав Сулейменов | Data Analyst & PM Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Основные стили */
+        :root {
+            --accent-color: #10b981; /* Зеленый (emerald) */
+            --dark-color: #1f2937; /* Темно-серый */
+            --light-bg: #f9fafb; /* Очень светлый серый */
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--dark-color);
+        }
+        .header-bg {
+            /* Градиент, максимально похожий на темный фон из примера */
+            background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+        }
+        .accent-color {
+            color: var(--accent-color);
+        }
+        .accent-bg {
+            background-color: var(--accent-color);
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+        .section-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--dark-color);
+        }
+        @media (min-width: 640px) {
+            .section-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Стиль для активных ссылок сертификатов */
+        .cert-link:hover {
+            text-decoration: underline;
+            color: var(--accent-color);
+        }
+        
+        /* Стиль для иконок контактов в шапке */
+        .icon-link {
+            transition: color 0.3s;
+        }
+        .icon-link:hover {
+            color: #fcd34d; /* Желтый hover для контраста */
+        }
+        
+        /* Стиль для оформления изображения в стиле примера */
+        .profile-ring {
+            border: 4px solid #fcd34d; /* Желтое кольцо */
+            background-color: var(--accent-color); /* Зеленый фон для инициалов */
+        }
+        
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- JavaScript для плавного скролла и переключения мобильного меню -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Плавный скролл
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    // Скрыть меню после клика на мобильном
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                         mobileMenu.classList.add('hidden');
+                    }
+                    
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Переключение мобильного меню
+            const menuButton = document.getElementById('menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (menuButton && mobileMenu) {
+                menuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+        });
+        
+        // Функции для обработки ошибок загрузки изображений
+        function onImageError(element, fallbackText) {
+            element.onerror = null; // Предотвратить бесконечный цикл
+            element.style.display = 'none'; // Скрыть неработающий тег <img>
+            
+            // Добавить текстовую заглушку
+            const fallbackDiv = document.createElement('div');
+            fallbackDiv.className = 'text-center text-gray-500 text-xs mt-2';
+            fallbackDiv.textContent = fallbackText || 'Logo';
+            element.parentNode.insertBefore(fallbackDiv, element.nextSibling);
+        }
+    </script>
+
+    <!-- Навигация -->
+    <nav class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <!-- Логотип/Имя -->
+                <div class="flex items-center">
+                    <span class="text-xl font-bold accent-color">Ярослав С.</span>
+                </div>
+                
+                <!-- Десктопное Меню и Переключатель Языка -->
+                <div class="hidden lg:flex items-center space-x-4">
+                    <a href="#about" class="text-gray-600 hover:text-gray-900 transition duration-150">Обо мне</a>
+                    <a href="#portfolio" class="text-gray-600 hover:text-gray-900 transition duration-150">Портфолио</a>
+                    <a href="#tech-stack" class="text-gray-600 hover:text-gray-900 transition duration-150">Инструменты</a>
+                    <a href="#experience" class="text-gray-600 hover:text-gray-900 transition duration-150">Опыт</a>
+                    <!-- Кнопка перехода на английскую версию -->
+                    <a href="index_en.html" class="px-3 py-1 text-sm font-semibold rounded-lg accent-bg text-white hover:opacity-90 transition duration-150">
+                        English
+                    </a>
+                </div>
+
+                <!-- Кнопка-гамбургер для мобильных -->
+                <div class="flex items-center lg:hidden">
+                    <a href="index_en.html" class="px-3 py-1 mr-2 text-sm font-semibold rounded-lg accent-bg text-white hover:opacity-90 transition duration-150">
+                        English
+                    </a>
+                    <button id="menu-button" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                        <!-- Иконка гамбургера -->
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Мобильное Меню (скрыто по умолчанию) -->
+        <div id="mobile-menu" class="hidden lg:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-gray-200">
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">Обо мне</a>
+                <a href="#portfolio" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">Портфолио</a>
+                <a href="#tech-stack" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">Инструменты</a>
+                <a href="#experience" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">Опыт</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section (Обновлено в соответствии с запросом) -->
+    <header id="hero" class="header-bg py-16 sm:py-24 text-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between">
+            
+            <div class="lg:w-3/5 space-y-4 text-center lg:text-left">
+                <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight">
+                    Ярослав Сулейменов
+                </h1>
+                <!-- Должность, оставлена по запросу -->
+                <p class="text-xl sm:text-3xl font-light text-yellow-300">
+                    Project Manager / Business Analyst
+                </p>
+                
+                <!-- Добавлены кнопки контактов: Email, Telegram, Резюме -->
+                <div class="mt-4 flex justify-center lg:justify-start space-x-6 text-2xl">
+                    <!-- Email -->
+                    <a href="mailto:yarsuleimenov@gmail.com" class="icon-link text-white" title="Email">
+                        <svg class="w-6 h-6 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26c.45.3.99.44 1.5.44s1.05-.14 1.5-.44L21 8M3 8V6a2 2 0 012-2h14a2 2 0 012 2v2M3 8l5.89 3.93c.45.3.99.44 1.5.44s1.05-.14 1.5-.44L21 8"></path></svg>
+                    </a>
+                    <!-- Telegram -->
+                    <a href="https://t.me/Yar_Suleimenov" target="_blank" class="icon-link text-white" title="Telegram">
+                        <svg class="w-6 h-6 inline" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.84 8.76l-8.5 3.32c-.74.28-.73.7-.12.9l2.06.63 4.88-3.04c.23-.15.44-.09.2.06l-4.04 3.65-.13.06-.54 1.76c.2.08.38.1.58.1.33 0 .6-.13.75-.4l1.16-1.12 3.6 2.65c.67.4 1.15.2 1.34-.63l.97-4.57c.18-.76-.32-1.12-1.02-.85z"></path></svg>
+                    </a>
+                    <!-- Резюме HH.KZ -->
+                    <a href="https://karaganda.hh.kz/resume/7cb80dacff0ebc71240039ed1f317635616543" target="_blank" class="icon-link text-white" title="Резюме (hh.kz)">
+                        <svg class="w-6 h-6 inline" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"></path></svg>
+                    </a>
+                </div>
+                
+                <p class="text-gray-300 text-lg max-w-xl mx-auto lg:mx-0 pt-2">
+                    Более 10 лет опыта в B2B-сегменте, с фокусом на <strong>концепции IBP, сквозном планировании</strong>, анализе бизнес-процессов и подготовке управленческой отчётности.
+                </p>
+                <a href="#about" class="inline-block mt-6 px-8 py-3 bg-white accent-color font-semibold rounded-lg shadow-xl hover:bg-gray-100 transition duration-300">
+                    Узнать больше
+                </a>
+            </div>
+            
+            <!-- Возврат к оригинальной фотографии assets/main_foto.jpg -->
+            <div class="lg:w-2/5 mt-10 lg:mt-0 flex justify-center">
+                <!-- Удаляем класс profile-ring, чтобы избежать конфликта стилей с фото -->
+                <div class="w-64 h-64 sm:w-80 sm:h-80 rounded-full overflow-hidden ring-4 ring-white ring-offset-4 ring-offset-gray-700 shadow-2xl">
+                    <img src="assets/main_foto.jpg" alt="Фото профиля Ярослава Сулейменова" class="w-full h-full object-cover" onerror="onImageError(this, 'Фото профиля')">
+                </div>
+            </div>
+            
+        </div>
+    </header>
+
+    <!-- Основные квалификации -->
+    <section id="about" class="py-12 sm:py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="section-title text-center mb-12">Ключевые квалификации</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                <!-- Карточка 1: Анализ данных -->
+                <div class="card p-6 shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-[1.02]">
+                    <div class="text-3xl accent-color mb-3">📊</div>
+                    <h3 class="text-xl font-bold mb-3">IBP и Сквозное планирование</h3>
+                    <p class="text-gray-600">
+                        Глубокое знание архитектуры моделей, финансового моделирования и подготовки данных. Владение <strong>SQL, Python</strong> и <strong>Power BI</strong> для анализа и визуализации.
+                    </p>
+                </div>
+
+                <!-- Карточка 2: Бизнес-Консалтинг -->
+                <div class="card p-6 shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-[1.02]">
+                    <div class="text-3xl accent-color mb-3">📈</div>
+                    <h3 class="text-xl font-bold mb-3">Бизнес-аналитика и B2B</h3>
+                    <p class="text-gray-600">
+                        10+ лет опыта в B2B продажах и управлении клиентами. Фокус на <strong>ABC/XYZ-анализе</strong>, контроле KPI (OSA, Shelf Share) и увеличении рентабельности контрактов.
+                    </p>
+                </div>
+
+                <!-- Карточка 3: Управление и Обучение -->
+                <div class="card p-6 shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-[1.02]">
+                    <div class="text-3xl accent-color mb-3">🧑‍🏫</div>
+                    <h3 class="text-xl font-bold mb-3">PM-навыки и Обучение</h3>
+                    <p class="text-gray-600">
+                        Опыт управления задачами через <strong>YouTrack</strong>, координации presale-команд и проведения обучающих вебинаров/курсов для junior-специалистов и студентов.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Портфолио проектов -->
+    <section id="portfolio" class="py-12 sm:py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="section-title mb-6">Портфолио | Проектный опыт</h2>
+            <p class="text-lg text-gray-600 mb-8">
+                Реальные демонстрации навыков в OLAP-моделировании, аналитике и создании обучающего контента.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Проект 1: OLAP Course -->
+                <div class="card p-6 shadow-xl bg-gray-50 border border-gray-200 text-left flex flex-col">
+                    <h3 class="text-2xl font-bold mb-3 accent-color">
+                        Факультативный курс "Введение в IBP и OLAP"
+                    </h3>
+                    <p class="text-gray-700 mb-4 flex-grow">
+                        Самостоятельно разработанный и прочитанный курс для студентов университета МУИТ. Содержит материалы по архитектуре, моделированию и финансовому анализу.
+                    </p>
+                    <div class="flex flex-wrap gap-3 mt-auto">
+                        <a href="https://yarsuleimenov-code.github.io/IITU_OLAP_Course/" target="_blank" class="inline-block px-4 py-2 text-sm font-semibold text-white accent-bg rounded-lg shadow-md hover:opacity-90 transition duration-300">
+                            Посмотреть курс ↗
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Проект 2: A/B Test Dashboard -->
+                <div class="card p-6 shadow-xl bg-gray-50 border border-gray-200 text-left flex flex-col">
+                    <h3 class="text-2xl font-bold mb-3 accent-color">
+                        A/B-тест: Эффективность пуш-уведомлений
+                    </h3>
+                    <p class="text-gray-700 mb-2">
+                        Анализ на Python (Pandas, SciPy, Matplotlib) влияния пуш-уведомлений на ключевые метрики.
+                    </p>
+                    <ul class="text-gray-700 text-sm mb-4 list-disc list-inside ml-4">
+                        <li>Рост среднего чека: <strong>+11.9%</strong></li>
+                        <li>Рост конверсии: <strong>+4.3 п.п.</strong></li>
+                        <li>Включает детальный региональный анализ.</li>
+                    </ul>
+                    <div class="flex flex-wrap gap-3 mt-auto">
+                        <a href="ab_report/index.html" class="inline-block px-4 py-2 text-sm font-semibold text-white accent-bg rounded-lg shadow-md hover:opacity-90 transition duration-300">
+                            Посмотреть инфографику
+                        </a>
+                        <!-- КОРРЕКЦИЯ: Использование правильного пути и репозитория для nbviewer -->
+                        <a href="https://nbviewer.jupyter.org/github/yarsuleimenov-code/yarsuleimenov-profile/blob/main/ab_report/ab_report.ipynb" target="_blank" class="inline-block px-4 py-2 text-sm font-semibold bg-gray-700 text-white rounded-lg shadow-md hover:bg-gray-600 transition duration-300">
+                            Исходный код (Jupyter) ↗
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Технологический Стек -->
+    <section id="tech-stack" class="py-12 sm:py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="section-title text-center mb-12">Мои инструменты</h2>
+            <div class="flex flex-wrap justify-center gap-6 sm:gap-8">
+
+                <!-- Инструмент: SQL -->
+                <div class="flex flex-col items-center p-4 card w-28 sm:w-32 hover:shadow-lg transition duration-300">
+                    <img src="assets/icons/sql_logo.jpg" alt="Логотип SQL" class="w-12 h-12 mb-2 object-contain" onerror="onImageError(this, 'SQL')">
+                    <p class="font-semibold text-sm text-center">SQL</p>
+                </div>
+
+                <!-- Инструмент: Python -->
+                <div class="flex flex-col items-center p-4 card w-28 sm:w-32 hover:shadow-lg transition duration-300">
+                    <img src="assets/icons/python_logo.jpg" alt="Логотип Python" class="w-12 h-12 mb-2 object-contain" onerror="onImageError(this, 'Python')">
+                    <p class="font-semibold text-sm text-center">Python</p>
+                </div>
+
+                <!-- Инструмент: Power BI -->
+                <div class="flex flex-col items-center p-4 card w-28 sm:w-32 hover:shadow-lg transition duration-300">
+                    <img src="assets/icons/BI_logo.jpg" alt="Логотип Power BI" class="w-12 h-12 mb-2 object-contain" onerror="onImageError(this, 'Power BI')">
+                    <p class="font-semibold text-sm text-center">Power BI</p>
+                </div>
+
+                <!-- Инструмент: CasPlan -->
+                <div class="flex flex-col items-center p-4 card w-28 sm:w-32 hover:shadow-lg transition duration-300">
+                    <img src="assets/icons/casplan.png" alt="Логотип CasPlan" class="w-12 h-12 mb-2 object-contain" onerror="onImageError(this, 'CasPlan (OLAP)')">
+                    <p class="font-semibold text-sm text-center">CasPlan</p>
+                </div>
+
+                <!-- Инструмент: YouTrack -->
+                <div class="flex flex-col items-center p-4 card w-28 sm:w-32 hover:shadow-lg transition duration-300">
+                    <img src="assets/icons/youtrack_logo.jpg" alt="Логотип YouTrack" class="w-12 h-12 mb-2 object-contain" onerror="onImageError(this, 'YouTrack')">
+                    <p class="font-semibold text-sm text-center">YouTrack</p>
+                </div>
+
+                <!-- Инструмент: Excel -->
+                <div class="flex flex-col items-center p-4 card w-28 sm:w-32 hover:shadow-lg transition duration-300">
+                    <img src="assets/icons/excel_logo.jpg" alt="Логотип Excel" class="w-12 h-12 mb-2 object-contain" onerror="onImageError(this, 'Excel')">
+                    <p class="font-semibold text-sm text-center">Excel</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    
+    <!-- Образование и Сертификация -->
+    <section id="education" class="py-12 sm:py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="section-title text-center mb-12">Актуальная квалификация</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Сертификат 1: Аналитик данных -->
+                <div class="card p-6 shadow-md border-t-4 border-t-blue-500">
+                    <h3 class="text-lg font-bold mb-2 text-gray-700">Аналитик данных (2026)</h3>
+                    <p class="text-sm text-gray-500 mb-4">ОАНО ДПО "СКАЕНГ"</p>
+                    <a href="assets/diplom.jpg" target="_blank" class="text-sm font-semibold text-blue-600 cert-link">
+                        Посмотреть диплом ↗
+                    </a>
+                </div>
+                
+                <!-- Сертификат 2: BI-аналитик -->
+                <div class="card p-6 shadow-md border-t-4 border-t-yellow-600">
+                    <h3 class="text-lg font-bold mb-2 text-gray-700">ВІ-аналитик (2025)</h3>
+                    <p class="text-sm text-gray-500 mb-4">Analytic Workspace Academy</p>
+                    <a href="assets/BI_analyst.pdf" target="_blank" class="text-sm font-semibold text-blue-600 cert-link">
+                        Посмотреть сертификат (PDF) ↗
+                    </a>
+                </div>
+
+                <!-- Сертификат 3: Анализ фин. отчетности -->
+                <div class="card p-6 shadow-md border-t-4 border-t-orange-500">
+                    <h3 class="text-lg font-bold mb-2 на text-gray-700">Анализ финансовой отчетности</h3>
+                    <p class="text-sm text-gray-500 mb-4">Электронный сертификат (2025)</p>
+                    <a href="assets/fin_analysis.pdf" target="_blank" class="text-sm font-semibold text-blue-600 cert-link">
+                        Посмотреть сертификат (PDF) ↗
+                    </a>
+                </div>
+                
+                <!-- Сертификат 4: Технологии управления клиентским опытом -->
+                <div class="card p-6 shadow-md border-t-4 border-t-red-500">
+                    <h3 class="text-lg font-bold mb-2 text-gray-700">Технологии управления клиентским опытом</h3>
+                    <p class="text-sm text-gray-500 mb-4">Электронный сертификат</p>
+                    <a href="assets/client_exp.pdf" target="_blank" class="text-sm font-semibold text-blue-600 cert-link">
+                        Посмотреть сертификат (PDF) ↗
+                    </a>
+                </div>
+                
+                <!-- Сертификат 5: Интерактивный тренажер по SQL -->
+                <div class="card p-6 shadow-md border-t-4 border-t-green-500">
+                    <h3 class="text-lg font-bold mb-2 text-gray-700">Интерактивный тренажер по SQL</h3>
+                    <p class="text-sm text-gray-500 mb-4">Online-платформа (2024)</p>
+                    <a href="assets/SQL_sert.pdf" target="_blank" class="text-sm font-semibold text-blue-600 cert-link">
+                        Посмотреть сертификат (PDF) ↗
+                    </a>
+                </div>
+
+            </div>
+            
+            <div class="mt-10 pt-6 border-t border-gray-200">
+                <h3 class="text-xl font-bold mb-2">Основное высшее образование</h3>
+                <p class="text-gray-700">
+                    Карагандинский экономический университет Казпотребсоюза (2010)<br>
+                    Специальность: Правовое регулирование в сфере экономики
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Опыт работы -->
+    <section id="experience" class="py-12 sm:py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="section-title text-center mb-12">Опыт работы</h2>
+
+            <!-- Опыт 1:  Optimacros -->
+            <div class="mb-10 p-6 card">
+                <h3 class="text-xl sm:text-2xl font-bold accent-color mb-1">Аналитик данных / Методолог IBP, S&OP</h3>
+                <p class="text-lg font-semibold text-gray-700 mb-2">Оптимакрос (Optimacros) | Май 2025 – Наст. время</p>
+                <ul class="list-disc list-inside space-y-2 text-gray-600">
+                    <li><strong>Выступаю методологом S&OP/IBP:</strong> транслирую бизнес-требования (Sales, Ops, Finance) в архитектуру OLAP-моделей, обеспечивая техническую и логическую связность планов.</li>
+                    <li><strong>Инициировал образовательный проект с МУИТ:</strong> разработал и внедрил курс <strong>«Введение в IBP и OLAP»</strong> (10 модулей), защитил программу у декана и подготовил методическую базу.</li>
+                    <li><strong>Технический эксперт в Pre-sale:</strong> настраиваю бизнес-сценарии на демо-стендах, готовлю Proof of Concept (PoC) и тестовые данные для демонстраций клиентам.</li>
+                    <li><strong>Развитие внутренней экспертизы:</strong> организовал серию вебинаров для BDM и Junior-аналитиков, а также управляю базой знаний и бэклогом задач в <strong>YouTrack</strong>.</li>
+                </ul>
+            </div>
+            
+            <!-- Опыт 2: Forte Holding GmbH -->
+            <div class="mb-10 p-6 card">
+                <h3 class="text-xl sm:text-2xl font-bold accent-color mb-1">Региональный представитель бренда</h3>
+                <p class="text-lg font-semibold text-gray-700 mb-2">Forte Holding GmbH | Июнь 2023 – Май 2025</p>
+                <ul class="list-disc list-inside space-y-2 text-gray-600">
+                    <li>Построил клиентскую базу в 4 городах Казахстана, обеспечив устойчивое присутствие бренда на новой территории.</li>
+                    <li>Провёл <strong>АВС/XYZ-анализ</strong> клиентской базы, выделив приоритетные <strong>20% клиентов</strong>, генерирующих <strong>75% выручки</strong></li>
+                    <li>Вёл регулярную аналитику продаж: выявлял причины отклонений от планов, анализировал эффективность маркетинговых мероприятий по <strong>KPI</strong> (рост продаж, ROI промо).</li>
+                    <li>Оптимизировал процесс работы с сервисными заявками, что <strong>сократило время отклика</strong> и повысило удовлетворённость клиентов.</li>
+                </ul>
+            </div>
+
+            <!-- Опыт 3: Русский свет ООО -->
+            <div class="mb-10 p-6 card">
+                <h3 class="text-xl sm:text-2xl font-bold accent-color mb-1">Ведущий менеджер по работе с ключевыми клиентами</h3>
+                <p class="text-lg font-semibold text-gray-700 mb-2">Русский свет ООО | Сентябрь 2016 – Май 2023</p>
+                <ul class="list-disc list-inside space-y-2 text-gray-600">
+                    <li>Обеспечил рост оборота по B2B-сегменту на <strong>20% ежегодно</strong>.</li>
+                    <li>Проводил регулярный анализ продаж и валовой прибыли, увеличив рентабельность ключевых контрактов на <strong>12%</strong>.</li>
+                    <li>Автоматизировал взаимодействие с клиентами, обеспечив уровень заказов через интернет-магазин на уровень <strong>87%</strong>.</li>
+                    <li>Управлял портфелем B2B-клиентов (металлургия, машиностроение), контролировал объемы поставок (Sell-In) и уровень маржинальности.</li>
+                </ul>
+            </div>
+
+            <!-- Опыт 4: TOO «220 VOLT (ИП Ашимова М.М.) -->
+            <div class="mb-10 p-6 card">
+                <h3 class="text-xl sm:text-2xl font-bold accent-color mb-1">Аналитик отдела снабжения</h3>
+                <p class="text-lg font-semibold text-gray-700 mb-2">ТОО «220 VOLT (ИП Ашимова М.М.) | Февраль 2014 – Сентябрь 2016</p>
+                <ul class="list-disc list-inside space-y-2 text-gray-600">
+                    <li>Разработал <strong>автоматизированную Excel-систему</strong> (формулы, сводные таблицы, макросы), сократив обновление и очистку прайсов с <strong>2-3 часов до 30 минут</strong>.</li>
+                    <li>Провёл сегментацию ассортимента (<strong>АВС/XYZ-анализ</strong>), инициировал сезонную ротацию и исключение 50+ SKU с низкой рентабельностью.</li>
+                    <li>Контролировал товарные остатки по 15+ брендам и обеспечивал ежемесячное снижение избыточных остатков на <strong>8-12%</strong>.</li>
+                    <li>Автоматизировал расчёт коммерческих предложений, сократив время подготовки заявок с 1-2 дней до <strong>2-3 часов</strong>.</li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Футер / Контакты -->
+    <footer class="header-bg py-10 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h3 class="text-3xl font-bold mb-5">Контакты для связи</h3>
+            <div class="space-y-2 text-xl">
+                <p>
+                    Email: <a href="mailto:yarsuleimenov@gmail.com" class="text-yellow-400 hover:text-yellow-300 transition duration-300">yarsuleimenov@gmail.com</a>
+                </p>
+                <p>
+                    Телефон: <a href="tel:+77026190091" class="text-yellow-400 hover:text-yellow-300 transition duration-300">+7 (702) 619-00-91</a>
+                </p>
+                <p>
+                    Telegram: <a href="https://t.me/Yar_Suleimenov" target="_blank" class="text-yellow-400 hover:text-yellow-300 transition duration-300">@Yar_Suleimenov ↗</a>
+                </p>
+            </div>
+            <p class="mt-8 text-sm text-gray-400">
+                &copy; 2025 Ярослав Сулейменов. 
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
